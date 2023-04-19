@@ -179,7 +179,7 @@ func (a *AVLTree) delete(root *AVLNode, key int) *AVLNode {
 		} else {
 			// select min value node at root's right subtree
 			minValueNode := root.rChild
-			for minValueNode != nil {
+			for minValueNode.lChild != nil {
 				minValueNode = minValueNode.lChild
 			}
 			// replace root with minValue Node

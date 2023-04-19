@@ -33,4 +33,15 @@ func TestAVLTree(t *testing.T) {
 			t.Logf("invalid inorder result: %v", result[i])
 		}
 	}
+
+	for i := 0; i < 1000; i++ {
+		avl.Delete(seq[i])
+	}
+
+	result = avl.Inorder()
+	for i := 0; i < len(result)-1; i++ {
+		if result[i] > result[i+1] {
+			t.Logf("invalid inorder result:%v", result[i])
+		}
+	}
 }
