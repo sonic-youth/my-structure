@@ -262,6 +262,25 @@ func (a *AVLTree) Inorder() []int {
 	return a.inOrder(a.root)
 }
 
+// Load load the value from avl tree by the key
+// TODO: concurrency
+func (a *AVLTree) Load(key int) (interface{}, bool) {
+	return a.load(a.root, key)
+}
+
+func (a *AVLTree) load(root *AVLNode, key int) (interface{}, bool) {
+	if root == nil {
+		return nil, false
+	}
+	if root.key == key {
+		return root.value, true
+	}
+	if key < root.key {
+		return a.load(root.lChild, key)
+	}
+	return a.load(root.rChild, key)
+}
+
 func (a *AVLTree) newAVLNode(key int, lChild *AVLNode, rChild *AVLNode, value interface{}, height int) *AVLNode {
 	return &AVLNode{
 		key:    key,
