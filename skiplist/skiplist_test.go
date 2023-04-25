@@ -2,6 +2,7 @@ package skiplist
 
 import (
 	"github.com/smartystreets/goconvey/convey"
+	"github.com/stretchr/testify/assert"
 	"math/rand"
 	"testing"
 	"time"
@@ -50,4 +51,19 @@ func TestSkipList(t *testing.T) {
 			}
 		})
 	})
+}
+
+func BenchmarkSkipList_Search(b *testing.B) {
+	skipList, err := NewSkipList()
+	assert.Nil(b, err)
+	rand.Seed(time.Now().Unix())
+	for i := 0; i < 10000; i++ {
+		x := rand.Intn(100000000000)
+		skipList.Insert(x, rand.Intn(100000000000))
+	}
+	b.Logf("item for skipList: %v", skipList.Size())
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		skipList.Search(rand.Intn(100000000000))
+	}
 }

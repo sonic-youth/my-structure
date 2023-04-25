@@ -248,7 +248,7 @@ func (s *SkipList) Size() int {
 // probability should less than 1.00
 func NewSkipList(opts ...SkiplistOption) (*SkipList, error) {
 	option := &skiplistOption{
-		maxLevel:    5,
+		maxLevel:    18,
 		probability: 0.5,
 	}
 
