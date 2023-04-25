@@ -248,7 +248,7 @@ func (s *SkipList) Size() int {
 // probability should less than 1.00
 func NewSkipList(opts ...SkiplistOption) (*SkipList, error) {
 	option := &skiplistOption{
-		maxLevel:    5,
+		maxLevel:    18,
 		probability: 0.5,
 	}
 
@@ -257,7 +257,10 @@ func NewSkipList(opts ...SkiplistOption) (*SkipList, error) {
 	}
 
 	if option.probability >= 1.0 {
-		return nil, errors.New("invalid probability")
+		return nil, errors.New("probability can't equal or larger than 1.0")
+	}
+	if option.maxLevel > 64 {
+		return nil, errors.New("maxLevel can't larger than 64")
 	}
 
 	//init a start header node
