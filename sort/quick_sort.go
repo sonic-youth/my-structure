@@ -7,7 +7,6 @@ type Slice interface {
 }
 
 // QuickSort just use quick sort algorithm to sort the slice you provided
-
 func QuickSort(data Slice) {
 	quickSort(data, 0, data.Len()-1)
 }
